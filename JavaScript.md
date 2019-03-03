@@ -1,1 +1,15 @@
-<!DOCTYPE html> <html lang="zh"> <head> <meta charset="utf-8"/> <title>Markdown在线编辑器 - www.MdEditor.com</title> <link rel="shortcut icon" href="https://www.mdeditor.com/images/logos/favicon.ico" type="image/x-icon"/> </head> <body><h1 id="h1-javascript-"><a name="JavaScript中的一些问题" class="reference-link"></a><span class="header-link octicon octicon-link"></span>JavaScript中的一些问题</h1><h3 id="h3-u539Fu578Bu4EE5u53CAu539Fu578Bu94FE"><a name="原型以及原型链" class="reference-link"></a><span class="header-link octicon octicon-link"></span>原型以及原型链</h3><h4 id="h4-prototype"><a name="prototype" class="reference-link"></a><span class="header-link octicon octicon-link"></span>prototype</h4><p>首先来介绍下 prototype 属性。这是一个显式原型属性，只有函数才拥有该属性。基本上所有函数都有这个属性，但是也有一个例外 <code>let fun = Function.prototype.bind()</code> 如果你以上述方法创建一个函数，那么可以发现这个函数是不具有 prototype 属性的。</p> <h4 id="h4-prototype-"><a name="prototype 如何产生的？" class="reference-link"></a><span class="header-link octicon octicon-link"></span>prototype 如何产生的？</h4><p>当我们声明一个函数时，这个属性就被自动创建了。<code>function Foo() {}</code> 并且这个属性的值是一个对象（也就是原型），只有一个属性 constructor。<br><img src="https://github.com/18134906388/Summary-Document/blob/master/image/prototype.png?raw=true" alt="函数prototype"> </p></body> </html>
+# JavaScript中的一些问题
+
+### 原型以及原型链
+#### prototype
+首先来介绍下 prototype 属性。这是一个显式原型属性，只有函数才拥有该属性。基本上所有函数都有这个属性，但是也有一个例外 ```let fun = Function.prototype.bind()``` 如果你以上述方法创建一个函数，那么可以发现这个函数是不具有 prototype 属性的。
+#### prototype 如何产生的？
+当我们声明一个函数时，这个属性就被自动创建了。```function Foo() {}``` 并且这个属性的值是一个对象（也就是原型），只有一个属性 constructor 对应着构造函数，也就是 Foo。
+![函数prototype](https://github.com/18134906388/Summary-Document/blob/master/image/prototype.png?raw=true)
+#### constructor
+constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的 prototype ，那么新对象就没有这个属性了。
+
+那么你肯定也有一个疑问，这个属性到底有什么用呢？其实这个属性可以说是一个历史遗留问题，在大部分情况下是没用的，在我的理解里，我认为他有两个作用：
+
+- 让实例对象知道是什么函数构造了它
+- 如果想给某些类库中的构造函数增加一些自定义的方法，就可以通过 xx.constructor.method 来扩展

@@ -7,7 +7,7 @@
 当我们声明一个函数时，这个属性就被自动创建了。`function Foo() {}` ,并且这个属性的值是一个对象（也就是原型），只有一个属性 constructor 对应着构造函数，也就是 Foo。<br>
 ![函数prototype](https://github.com/18134906388/Summary-Document/blob/master/image/prototype.png?raw=true)
 ### constructor
-constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的 prototype ，那么新对象就没有这个属性了。<br>
+constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的 prototype ，那么新对象就没有这个属性了。原型的 constructor 属性指向构造函数，构造函数又通过 prototype 属性指回原型，但是并不是所有函数都具有这个属性，Function.prototype.bind() 就没有这个属性。<br>
 ![constructor](https://github.com/18134906388/Summary-Document/blob/master/image/constructor.jpg?raw=true "constructor")
 
 那么你肯定也有一个疑问，这个属性到底有什么用呢？其实这个属性可以说是一个历史遗留问题，在大部分情况下是没用的，在我的理解里，我认为他有两个作用：
@@ -42,6 +42,7 @@ constructor 是一个公有且不可枚举的属性。一旦我们改变了函�
 现在可以来解释 Function.__proto__ === Function.prototype 这个问题了。因为先有的 Function.prototype 以后才有的 function Function() ，所以也就不存在鸡生蛋蛋生鸡的悖论问题了。对于为什么 Function.__proto__ 会等于 Function.prototype ，个人的理解是：其他所有的构造函数都可以通过原型链找到 Function.prototype ，并且 function Function() 本质也是一个函数，为了不产生混乱就将 function Function() 的 __proto__ 联系到了 Function.prototype 上。
 
 ### 总结
+![原型以及原型链](https://user-gold-cdn.xitu.io/2018/11/16/1671d387e4189ec8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 1. Object 是所有对象的爸爸，所有对象都可以通过 __proto__ 找到它
 2. Function 是所有函数的爸爸，所有函数都可以通过 __proto__ 找到它
 3. Function.prototype 和 Object.prototype 是两个特殊的对象，他们由引擎来创建

@@ -64,4 +64,58 @@ var b = {...a};
 ```
 ### 深拷贝
 深拷贝会为对象的每一条属性重新开辟空间，将值拷贝过来，生成的新对象是一个独立的个体，和原来的对象不会相互影响。
-最简单的深拷贝就是通过json转换实现`JSON.parse(JSON.stringify(object))`，但是这样有一个问题就会丢失undefined symbol function属性，并且对象中如果有循环引用对象，这种方式会报错。
+最简单的深拷贝就是通过json转换实现`JSON.parse(JSON.stringify(object))`，但是这样有一个问题就会丢失undefined symbol function属性，并且对象中如果有循环引用对象，这种方式会报错。开发中推荐使用 lodash 的深拷贝函数。我们可以实现一个简易版的深拷贝函数。
+```JavaScript
+function deepCopy(obj){
+	function isObject(o){
+		return o!=null && (typeof o === 'object' || typeof o === 'function')
+	}
+	let isArray = Array.isArray(obj);
+	let newObj = isArray ? [...obj] : {...obj};
+	Reflect.ownKeys(newObj).forEach(function(e){
+		newObj[e] = isObject(obj[e]) ? deepCopy(obj[e]) : obj[e];
+	});
+	return newObj;
+}
+```
+
+## 闭包
+个人理解闭包就是定义在函数内部，可以用来访问函数内部变量的函数。最近遇到的一个闭包问题就是在for循环中使用setTimeout函数。
+```JavaScript
+for(var i=0;i<=10;i++){
+    setTimeout(() => {
+        console.log(i);
+    }, i*1000);
+}
+```
+上面函数会打印十个11，这并不是我们想要的结果。我们可以使用闭包解决这个问题。
+```JavaScript
+for(var i=0;i<=10;i++){
+    (function(i){
+        setTimeout(() => {
+            item.width = (i*10)+"%";
+            if(i==10){
+                item.Attachment = name.length>9 ? name.substring(0,6)+"..."+name.substring(name.length-3,name.length) : name;
+                item.status = "completed";
+            }
+        }, i*1000);
+    })(i);
+}
+```
+另外还有两种解决方式
+个人理解闭包就是定义在函数内部，可以用来访问函数内部变量的函数。最近遇到的一个闭包问题就是在for循环中使用setTimeout函数。
+```JavaScript
+for(let i=0;i<=10;i++){
+    setTimeout(() => {
+        console.log(i);
+    }, i*1000);
+}
+```
+```JavaScript
+for(var i=0;i<=10;i++){
+    setTimeout(() => {
+        console.log(i);
+    }, i*1000,i);
+}
+```
+```

@@ -51,3 +51,17 @@ constructor 是一个公有且不可枚举的属性。一旦我们改变了函�
 6. 对象的 __proto__ 指向原型， __proto__ 将对象和原型连接起来组成了原型链
 
 ## 浅拷贝和深拷贝
+### 浅拷贝
+浅拷贝只会拷贝一层，如果对象的第一层所有属性都为原始数据类型（boolean null undefined number string symbol），会拷贝属性的值，如果其中含有对象类型，那么该条属性会拷贝对应的地址。
+浅拷贝有两种实现方式
+```JavaScript
+var a = {b:1};
+var b = a.assign({},a);
+```
+```JavaScript
+var a = {b:1};
+var b = {...a};
+```
+### 深拷贝
+深拷贝会为对象的每一条属性重新开辟空间，将值拷贝过来，生成的新对象是一个独立的个体，和原来的对象不会相互影响。
+最简单的深拷贝就是通过json转换实现`JSON.parse(JSON.stringify(object))`，但是这样有一个问题就会丢失undefined symbol function属性，并且对象中如果有循环引用对象，这种方式会报错。

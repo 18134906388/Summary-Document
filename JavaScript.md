@@ -118,4 +118,98 @@ for(var i=0;i<=10;i++){
     }, i*1000,i);
 }
 ```
+## this作用域
+
+## js的几种继承方式
+推荐看阮一峰老师的封装继承三件套
+
+http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html<br>
+http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html<br>
+http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html<br>
+总结一下继承分为构造函数的基础和非构造函数的继承
+### 构造函数的继承有五种方式
+```JavaScript
+function Animal(){
+    this.species = "动物";
+}
+function Cat(name,color){
+　　this.name = name;
+　　this.color = color;
+}
 ```
+现在我们要将猫的构造函数继承动物的构造函数
+1、构造函数绑定
+```JavaScript
+//改写Cat
+function Cat(name,color){
+　　Animal.apply(this, arguments);
+　　this.name = name;
+　　this.color = color;
+}
+```
+2、prototype模式
+```JavaScript
+Cat.prototype = new Animal();
+Cat.prototype.constructor = Cat;//必须要有这一步不然会造成原型链紊乱
+```
+3、直接继承prototype（不推荐这种，这种修改Cat的原型会影响Animal的原型 Animal.prototype.constructor === Cat）
+```JavaScript
+//改写Animal
+function Animla(){};
+Animal.prototype.species = "动物";
+//继承
+Cat.prototype = Animal.prototype;
+Cat.prototype.constructor = Cat;//必须要有这一步不然会造成原型链紊乱
+```
+4、利用空对象作为中介，这样会解决上面3遇到的问题
+```JavaScript
+//改写Animal
+function Animla(){};
+Animal.prototype.species = "动物";
+//继承
+function extend(Child, Parent) {
+　　var F = function(){};
+　　F.prototype = Parent.prototype;
+　　Child.prototype = new F();
+　　Child.prototype.constructor = Child;
+　　Child.uber = Parent.prototype;//这个属性直接指向父对象的prototype属性。（uber是一个德语词，意思是"向上"、"上一层"。）这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质。
+}
+```
+5、拷贝继承
+```JavaScript
+function extend2(Child, Parent) {
+　　var p = Parent.prototype;
+　　var c = Child.prototype;
+　　for (var i in p) {
+　　　　c[i] = p[i];
+　　}
+　　c.uber = p;
+}
+```
+### 非构造函数的继承
+非构造函数的继承在我看来也就是对象的继承。下面两个对象，我们要实现医生继承中国人，成为一个中国医生的对象。
+```JavaScript
+var Chinese = {
+　　nation:'中国'
+};
+var Doctor ={
+　　career:'医生'
+}
+```
+1、object()方法
+```JavaScript
+function object(o) {
+　　function F() {}
+　　F.prototype = o;
+　　return new F();
+}
+var Doctor = object(Chinese);
+Doctor.career = '医生';
+```
+2、浅拷贝
+
+参考上面浅拷贝深拷贝详解
+
+3、深拷贝
+
+参考上面浅拷贝深拷贝详解

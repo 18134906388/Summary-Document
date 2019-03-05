@@ -119,7 +119,11 @@ for(var i=0;i<=10;i++){
 }
 ```
 ## this作用域
+在我理解js中this作用域指向调用他的对象，但是在我查阅一些资料后，发现这个答案不全面，针对单个规则的，我们可以看下雨判断作用域。
 
+![this](https://user-gold-cdn.xitu.io/2018/11/15/16717eaf3383aae8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+当发生多个规则同时出现的情况，这时候不同的规则之间会根据优先级最高的来决定 this 最终指向哪里，new>bind>obj.foo()>foo()，同时，箭头函数的 this 一旦被绑定，就不会再被任何方式所改变。
 ## js的几种继承方式
 推荐看阮一峰老师的封装继承三件套
 
@@ -127,7 +131,7 @@ http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.
 http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html<br>
 http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html<br>
 总结一下继承分为构造函数的基础和非构造函数的继承
-### 构造函数的继承有五种方式
+### 构造函数的继承
 ```JavaScript
 function Animal(){
     this.species = "动物";
@@ -137,7 +141,7 @@ function Cat(name,color){
 　　this.color = color;
 }
 ```
-现在我们要将猫的构造函数继承动物的构造函数
+现在我们要将猫的构造函数继承动物的构造函数<br>
 1、构造函数绑定
 ```JavaScript
 //改写Cat

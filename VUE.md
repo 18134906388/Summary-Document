@@ -108,4 +108,16 @@ var vm = new Vue({
   }
 })
 ```
+## vue渲染机制
+参考https://segmentfault.com/a/1190000009467029
+![vue渲染机制](https://segmentfault.com/img/bVNSij?w=1023&h=761)
 
+独立构建：包含模板编译器
+
+渲染过程: html字符串 → render函数 → vnode → 真实dom节点
+
+运行时构建： 不包含模板编译器
+
+渲染过程: render函数 → vnode → 真实dom节点
+
+template会被便以为render函数，render函数返回值是一个jsx写法的dom树，随后vm._render函数会将r前面字符串编译的ender函数转化成vnode（虚拟节点），随后vm._update函数将vnode更新在真实的dom上面

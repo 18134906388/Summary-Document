@@ -93,5 +93,5 @@ BFC称为块级格式化上下文，它最大的特点就是每一个BFC都相�
 - position为absolute fixed
 
 ## CSS实践中遇到的问题
-### 将input type="file" 伪装成一个按钮
-
+#### 将input type="file" 伪装成一个按钮
+具体代码见demo1

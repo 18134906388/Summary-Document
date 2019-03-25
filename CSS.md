@@ -91,3 +91,7 @@ BFC称为块级格式化上下文，它最大的特点就是每一个BFC都相�
 - overflow不为visible（默认）
 - display为inline-block table-cell table-caption
 - position为absolute fixed
+
+## CSS实践中遇到的问题
+### 将input type="file" 伪装成一个按钮
+

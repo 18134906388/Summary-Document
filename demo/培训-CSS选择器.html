@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div1"></div>
+    <div id="div2"></div>
+    <div title="test"></div>
+    <div><span>test</span></div>
+</body>
+</html>
+<style>
+    /* 类选择器*/
+    .div1 {
+        width: 200px;
+        height: 200px;
+        background-color: black;
+    }
+    /* ID选择器*/
+    #div2 {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    /* 属性选择器*/
+    [title="test"]{
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+    }
+    /* 元素选择器*/
+    div{
+        width: 200px;
+        height: 200px;
+        background-color: green;
+    }
+    /* 通用选择器*/
+    * {
+        width: 200px;
+        height: 200px;
+        background-color:yellow;
+    }
+    /* 伪类选择器*/
+    div:before{
+        content: '111'
+    }
+
+    /*后代选择器*/
+    /* div span {
+        border: 1px solid #333;
+    } */
+    /*子代选择器*/
+    div>span {
+        border: 1px solid #333;
+    }
+    /*相邻兄弟代选择器*/
+    .div1 + #div2 {
+        border: 1px solid #fff;
+    }
+</style>

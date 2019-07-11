@@ -1,0 +1,44 @@
+html,body * {
+    margin: 20px;
+}
+
+.square{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #333;
+}
+.rectangle{
+    width: 400px;
+    height: 200px;
+    border: 1px solid #333;
+}
+.circular{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #333;
+    border-radius: 50%;
+}
+/*
+*** border-radius: 1-4 length|% / 1-4 length|%;
+*** 每个半径的四个值的顺序是：左上角水平半径，右上角水平半径，右下角水平半径，左下角水平半径，左上角垂直半径，右上角垂直半径，右下角垂直半径，左下角垂直半径，
+*/
+.ellipse{
+    width: 400px;
+    height: 200px;
+    border: 1px solid #333;
+    border-radius: 50%;
+}
+.triangle{
+    width: 0px;
+    height: 0px;
+    border: 100px solid;
+    /* border-color: orange blue red green; */
+    border-color: transparent transparent red;
+}
+.trapezoid{
+    width: 200px;
+    height: 0px;
+    border: 100px solid;
+    /* border-color: orange blue red green; */
+    border-color: transparent transparent red;
+}

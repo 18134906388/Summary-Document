@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="select" onmouseout="hideOptions()">
+        <li>
+            <input type="text" value="111" onclick="showOptions()">
+        </li>
+        <li>
+            <ul class="options">
+                <li>option1</li>
+                <li>option2</li>
+                <li>option3</li>
+                <li>option4</li>
+                <li>option5</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+<script>
+var showOptions = function() {
+    document.getElementsByClassName('options')[0].style.display = 'block';
+}
+var hideOptions = function(e) {
+    // IE下可以使用a.contains(b)判断a是否包含b
+    // 标准浏览器下a.compareDocumentPosition(b)有5个值，若为0表示为同一节点，若为2表示a位于b后面，若为4表示a位于b前面，若为10表示a为b的后代，若为20表示a为b的祖级。
+    e = window.event || e;
+    var s = e.toElement || e.relatedTarget;
+    if(document.all) {
+        if (!this.contains(s)) {
+            console.log('IE will out');
+            document.getElementsByClassName('options')[0].style.display = 'none';
+       }
+    } else {
+        var reg = e.currentTarget.compareDocumentPosition(s);
+        if (!(reg == 20 || reg == 0)) {
+            console.log('Browser will out');
+            document.getElementsByClassName('options')[0].style.display = 'none';
+        }
+    }
+}
+var optionsDom = document.getElementsByClassName('options')[0].getElementsByTagName('li')
+for (var i = 0; i< optionsDom.length; i++) {
+    optionsDom[i].addEventListener('click',function(e) {
+        document.getElementsByTagName('input')[0].value = e.currentTarget.innerHTML;
+    })
+}
+</script>
+</html>
+<style>
+ul,li {
+    padding:0;
+    margin:0;
+    list-style:none
+}
+.select {
+    width: 200px;
+}
+.select li *{
+    width: 100%
+}
+.options {
+    width: 100%
+    display: none;
+    cursor: pointer;
+    border: 1px solid
+}
+.options li:hover {
+    color: red;
+}
+</style>

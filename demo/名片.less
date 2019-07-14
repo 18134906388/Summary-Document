@@ -16,23 +16,25 @@ html,body {
             display: inline-block;
             vertical-align: middle;
             text-align: center;
+            font-size:20px;
+            font-family:MicrosoftYaHeiUI;
+            font-weight:800;
+            color:rgba(152,153,165,1);
+            line-height:36px;
             .pic{
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
                 overflow: hidden;
-                margin: 100px auto 50px;
+                margin: 40px auto 50px;
                 img {
+                    margin: 0px;
                     width: 100px;
                     height: 140px;
                 }
             }
             .name {
-                font-size:18px;
-                font-family:MicrosoftYaHeiUI;
-                font-weight:800;
-                color:rgba(152,153,165,1);
-                line-height:36px;
+                display: block;
                 &:before {
                     content: '——';
                     padding-right: 20px;
@@ -41,6 +43,34 @@ html,body {
                     content: '——';
                     padding-left: 20px;
                 }
+            }
+            h1 {
+                font-size: 18px;
+                font-weight: 600;
+            }
+            .phone {
+                background: url('../image/手机号.png') no-repeat center;
+                background-size: 100%;
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+            }
+            ul {
+                width: 300px;
+                margin: 0 auto;
+                padding:0;
+                list-style:none;
+                text-align: left;
+                font-size: 16px;
+                font-weight: 400;
+                li {
+                    width: 100%;
+
+                }
+            }
+            img {
+                margin-top: 40px;
+                width: 200px;
             }
         }
         section {
@@ -55,6 +85,44 @@ html,body {
             font-weight:800;
             color:rgba(152,153,165,1);
             line-height:36px;
+            .work {
+                vertical-align: middle;
+                i{
+                    background: url('../image/我的选中.png') no-repeat center;
+                    background-size: 100%;
+                    width: 40px;
+                    height: 40px;
+                    display: inline-block;
+                    margin-right: 40px;
+                    vertical-align: middle;
+                }
+                ul li {
+                    padding: 0 0 0 40px;
+                    span {
+                        vertical-align: middle;
+                        display: inline-block;
+                    }
+                }
+            }
+            .edu {
+                vertical-align: middle;
+                i{
+                    background: url('../image/银行卡.png') no-repeat center;
+                    background-size: 100%;
+                    width: 40px;
+                    height: 40px;
+                    display: inline-block;
+                    margin-right: 40px;
+                    vertical-align: middle;
+                }
+                ul li {
+                    padding: 0 0 0 40px;
+                    span {
+                        vertical-align: middle;
+                        display: inline-block;
+                    }
+                }
+            }
             .skills {
                 vertical-align: middle;
                 i{

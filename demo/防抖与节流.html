@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="inp">点击</button>
+</body>
+<script>
+const debounce = (func, wait = 50) => {
+  // 缓存一个定时器id
+  let timer = 0
+  // 这里返回的函数是每次用户实际调用的防抖函数
+  // 如果已经设定过定时器了就清空上一次的定时器
+  // 开始一个新的定时器，延迟执行用户传入的方法
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, wait)
+  }
+}
+const throttle = function throttle(fn, wait = 5000) {
+  let canRun = true; // 通过闭包保存一个标记
+  return function () {
+    if (!canRun) return; // 在函数开头判断标记是否为true，不为true则return
+    canRun = false; // 立即设置为false
+    setTimeout(() => { // 将外部传入的函数的执行放在setTimeout中
+      fn.apply(this, arguments);
+      // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。当定时器没有执行的时候标记永远是false，在开头被return掉
+      canRun = true;
+    }, wait);
+  };
+}
+var submit = function() {
+    (debounce(() => {
+        console.log(11);
+    },10000))(1111);
+}
+var sayHi = function() {
+    console.log(11);
+}
+var inp = document.getElementById('inp');
+inp.addEventListener('click', throttle(sayHi)); // 防抖  //必须采用这样的事件点击方式，初始对元素添加一次点击事件，后面不会重复触发throttle事件，只会触发他的返回值。
+</script>
+</html>
